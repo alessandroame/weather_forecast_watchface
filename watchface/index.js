@@ -1,33 +1,84 @@
 import ui from '@zos/ui'
 import {Time} from '@zos/sensor'
 
-let txt;
+let txt=null
+let bg=null
+let hourPointer=null
+let h=0;
+let m=0;
+let s=0;
 const time = new Time();
 WatchFace({
   onInit() {
     console.log('index page.js on init invoke')
+    bg=ui.createWidget(ui.widget.IMG,{
+      x:0,
+      y:0,
+      w:480,
+      h:480,
+      src:'bg.png'
+    })
+    hourPointer=ui.createWidget(ui.widget.IMG,{
+      x:5,
+      y:5,
+      w:470,
+      h:470,
+      pos_x:231 ,
+      pos_y:0,
+      center_x:235,
+      center_y:235,
+      src:'hour_pointer.png'
+    })
     txt=ui.createWidget(ui.widget.TEXT,{
-      x:100,
-      y:100,
-      w:200,
-      h:200,
+      x:0,
+      y:0,
+      w:480,
+      h:480,
       align_h: ui.align.CENTER_H,
-  })
+      align_v: ui.align.CENTER_V,
+      text_size:160,
+      color: 0x330000
+    })
   }, 
 
   build() {
-    console.log('index page.js on build invoke')
+    console.log('index.js on build invoke')
     time.onPerMinute(updateTime)
-    updateTime()
+    //setInterval(updateTime,10);
+    updateTime() 
   },
 
   onDestroy() {
-    console.log('index page.js on destroy invoke')
+    console.log('index.js on destroy invoke')
   },
 })
 
 function updateTime(){
+  // s+=240;
+  // if (s>59){
+  //   s=0;
+  //   m++;
+  //   if (m>59){
+  //     m=0;
+  //     h++
+  //     if (h>23){
+  //       h=0;
+  //     }
+  //   }
+  // }
+  h=time.getHours()
+  m=time.getMinutes()
+  s=time.getSeconds()
+  let angle=360/24*h
+  angle+=360/24/60*m;
+  angle+=360/24/60/60*s;
+  angle=angle-90
+  let msg=h+':'+m//+'.'+s+'  '+Math.ceil(angle);
+  console.log(msg)
   txt.setProperty(ui.prop.MORE, {
-    text: time.getHours()+":"+time.getMinutes()+"."+time.getSeconds()
+    text: msg
+  }) 
+  hourPointer.setProperty(ui.prop.MORE, {
+    angle: angle
   }); 
 }

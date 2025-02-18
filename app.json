@@ -21,28 +21,6 @@
     }
   },
   "targets": {
-    "390x450-amazfit-gts-3": {
-      "module": {
-        "watchface": {
-          "path": "watchface/index",
-          "main": 1,
-          "editable": 0,
-          "lockscreen": 0,
-          "hightCost": 0
-        }
-      },
-      "platforms": [
-        {
-          "name": "Zurich",
-          "deviceSource": 224
-        },
-        {
-          "name": "ZurichW",
-          "deviceSource": 225
-        }
-      ],
-      "designWidth": 390
-    },
     "480x480-amazfit-balance": {
       "module": {
         "watchface": {
