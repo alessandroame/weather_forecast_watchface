@@ -32,9 +32,9 @@
      inkscape:window-width="1718"
      inkscape:window-height="1360"
      inkscape:window-x="1706"
-     inkscape:window-y="851"
+     inkscape:window-y="0"
      inkscape:window-maximized="0"
-     inkscape:current-layer="svg1"
+     inkscape:current-layer="layer3"
      inkscape:export-bgcolor="#00000000" />
   <defs
      id="defs1">
@@ -112,14 +112,17 @@
      inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="hands"
-     style="display:none"
+     style="display:inline"
      sodipodi:insensitive="true">
     <path
        style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.970023;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
        d="m 63.670242,34.994169 c 1.321591,-0.0747 2.352846,-0.70122 2.387393,-2.5526 0.03455,-1.85137 -1.471027,-27.0185513 -1.51915,-28.3849215 -0.04812,-1.36638 -0.301853,-1.9393501 -1.065802,-1.9399801 -0.763948,-6.3e-4 -0.937773,0.4226 -1.065801,1.9399801 -0.128029,1.5173802 -1.460458,26.2565015 -1.465092,28.2828215 -0.0046,2.02632 1.40686,2.72939 2.728452,2.6547 z"
        id="path6"
        sodipodi:nodetypes="zzzzzzz"
-       inkscape:label="hour" />
+       inkscape:label="hour_pointer"
+       inkscape:export-filename="assets\480x480-amazfit-balance\hour_pointer.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
   </g>
   <g
      inkscape:groupmode="layer"
