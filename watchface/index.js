@@ -18,6 +18,16 @@ WatchFace({
       h:480,
       src:'bg.png'
     })
+    txt=ui.createWidget(ui.widget.TEXT,{
+      x:0,
+      y:0,
+      w:480,
+      h:480,
+      align_h: ui.align.CENTER_H,
+      align_v: ui.align.CENTER_V,
+      text_size:160,
+      color: 0x550000
+    })
     hourPointer=ui.createWidget(ui.widget.IMG,{
       x:5,
       y:5,
@@ -29,32 +39,26 @@ WatchFace({
       center_y:235,
       src:'hour_pointer.png'
     })
-    txt=ui.createWidget(ui.widget.TEXT,{
-      x:0,
-      y:0,
-      w:480,
-      h:480,
-      align_h: ui.align.CENTER_H,
-      align_v: ui.align.CENTER_V,
-      text_size:160,
-      color: 0x330000
-    })
   }, 
 
   build() {
     console.log('index.js on build invoke')
     time.onPerMinute(updateTime)
     //setInterval(updateTime,10);
-    updateTime() 
   },
 
   onDestroy() {
     console.log('index.js on destroy invoke')
   },
+  onResume(){
+    console.log('index.js on resume invoke')
+    updateTime() 
+
+  }
 })
 
 function updateTime(){
-  // s+=240;
+  // s+=480;
   // if (s>59){
   //   s=0;
   //   m++;
@@ -69,12 +73,13 @@ function updateTime(){
   h=time.getHours()
   m=time.getMinutes()
   s=time.getSeconds()
+  
   let angle=360/24*h
   angle+=360/24/60*m;
   angle+=360/24/60/60*s;
   angle=angle-90
   let msg=h+':'+m//+'.'+s+'  '+Math.ceil(angle);
-  console.log(msg)
+  console.log(msg+" "+angle)
   txt.setProperty(ui.prop.MORE, {
     text: msg
   }) 
