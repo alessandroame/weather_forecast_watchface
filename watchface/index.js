@@ -2,6 +2,7 @@ import ui from '@zos/ui'
 import {Time} from '@zos/sensor'
 
 let txt=null
+let dialAngleOffset=180;
 let bg=null
 let hourPointer=null
 let h=0;
@@ -10,13 +11,15 @@ let s=0;
 const time = new Time();
 WatchFace({
   onInit() {
+    console.log(`bg_${dialAngleOffset}.png`) 
+
     console.log('index page.js on init invoke')
     bg=ui.createWidget(ui.widget.IMG,{
       x:0,
       y:0,
       w:480,
       h:480,
-      src:'bg.png'
+      src:`bg_${dialAngleOffset}.png`
     })
     txt=ui.createWidget(ui.widget.TEXT,{
       x:0,
@@ -26,7 +29,7 @@ WatchFace({
       align_h: ui.align.CENTER_H,
       align_v: ui.align.CENTER_V,
       text_size:160,
-      color: 0x550000
+      color: 0x550000 
     })
     hourPointer=ui.createWidget(ui.widget.IMG,{
       x:5,
@@ -77,7 +80,7 @@ function updateTime(){
   let angle=360/24*h
   angle+=360/24/60*m;
   angle+=360/24/60/60*s;
-  angle=angle-90
+  angle=angle-dialAngleOffset
   let msg=h+':'+m//+'.'+s+'  '+Math.ceil(angle);
   console.log(msg+" "+angle)
   txt.setProperty(ui.prop.MORE, {
