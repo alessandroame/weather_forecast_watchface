@@ -29,7 +29,13 @@
           "editable": 0,
           "lockscreen": 0,
           "hightCost": 0
-        }
+        },
+        "app-side": {
+          "path": "app-side/index"
+        },
+        "setting": {
+          "path": "setting/index"
+        } 
       },
       "platforms": [
         {

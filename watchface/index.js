@@ -1,6 +1,11 @@
 import ui from '@zos/ui'
 import {Time} from '@zos/sensor'
+import { log as Logger } from "@zos/utils"
 
+import { createConnect,addListener ,disConnect  } from '@zos/ble'
+
+const log = Logger.getLogger("WATCHFACE");
+let pollinID=setInterval(() => { Polling() }, 100000);
 let txt=null
 let dialAngleOffset=180;
 let bg=null
@@ -9,11 +14,31 @@ let h=0;
 let m=0;
 let s=0;
 const time = new Time();
+
+function Polling(){
+  const msg='polling @'+h+':'+m+'.'+s;
+  log.info('sending: '+msg); 
+  //const buf = Buffer.from(msg)
+  //messaging.peerSocket.send(buf.buffer)
+  log.info(msg+' sent');
+}
+
+hmApp.onMessage = function (msg) {
+  console.log("Received message:", msg)
+  
+  if (msg.type === "update") {
+    hmUI.showToast({ text: msg.data })
+  }
+}
+
+addListener((status)=>{
+  log.error('status:'+status)
+})
+
 WatchFace({
   onInit() {
-    console.log(`bg_${dialAngleOffset}.png`) 
-
-    console.log('index page.js on init invoke')
+    log.debug('index page.js on init invoke')
+    log.info(`bg_${dialAngleOffset}.png`) 
     bg=ui.createWidget(ui.widget.IMG,{
       x:0,
       y:0,
@@ -45,16 +70,17 @@ WatchFace({
   }, 
 
   build() {
-    console.log('index.js on build invoke')
+    log.debug('index.js on build invoke')
     time.onPerMinute(updateTime)
     //setInterval(updateTime,10);
   },
 
   onDestroy() {
-    console.log('index.js on destroy invoke')
+    log.debug('index.js on destroy invoke') 
+    clearInterval(pollinID);
   },
   onResume(){
-    console.log('index.js on resume invoke')
+    log.debug('index.js on resume invoke')
     updateTime() 
 
   }
