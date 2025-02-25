@@ -5,7 +5,7 @@ import { log as Logger } from "@zos/utils"
 import { createConnect,addListener ,disConnect  } from '@zos/ble'
 
 const log = Logger.getLogger("WATCHFACE");
-let pollinID=setInterval(() => { Polling() }, 100000);
+//let pollingID=setInterval(() => { Polling() }, 100000);
 let txt=null
 let dialAngleOffset=180;
 let bg=null
@@ -14,7 +14,7 @@ let h=0;
 let m=0;
 let s=0;
 const time = new Time();
-
+/*
 function Polling(){
   const msg='polling @'+h+':'+m+'.'+s;
   log.info('sending: '+msg); 
@@ -34,7 +34,7 @@ hmApp.onMessage = function (msg) {
 addListener((status)=>{
   log.error('status:'+status)
 })
-
+*/
 WatchFace({
   onInit() {
     log.debug('index page.js on init invoke')
@@ -55,16 +55,18 @@ WatchFace({
       align_v: ui.align.CENTER_V,
       text_size:160,
       color: 0x550000 
-    })
+    }) 
+    let pointerMargin=12
+    let d=(480-pointerMargin*2)
     hourPointer=ui.createWidget(ui.widget.IMG,{
-      x:5,
-      y:5,
-      w:470,
-      h:470,
-      pos_x:231 ,
+      x:pointerMargin,
+      y:pointerMargin,
+      w:d,
+      h:d,
+      pos_x:d/2-19/2,
       pos_y:0,
-      center_x:235,
-      center_y:235,
+      center_x:d/2,
+      center_y:d/2,
       src:'hour_pointer.png'
     })
   }, 
@@ -77,7 +79,7 @@ WatchFace({
 
   onDestroy() {
     log.debug('index.js on destroy invoke') 
-    clearInterval(pollinID);
+    //clearInterval(pollingD);
   },
   onResume(){
     log.debug('index.js on resume invoke')
@@ -87,7 +89,8 @@ WatchFace({
 })
 
 function updateTime(){
-  // s+=480;
+  // s=59;
+  // m+=5;
   // if (s>59){
   //   s=0;
   //   m++;
